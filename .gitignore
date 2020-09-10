@@ -1,0 +1,7 @@
+.vscode
+.qmake.stash
+main.moc
+main.o
+main1
+Makefile
+moc_predefs.h
