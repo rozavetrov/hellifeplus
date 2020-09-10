@@ -2,6 +2,6 @@
 .qmake.stash
 main.moc
 main.o
-main1
+hellife
 Makefile
 moc_predefs.h
