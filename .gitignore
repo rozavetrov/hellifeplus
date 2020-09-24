@@ -1,7 +1,6 @@
 .vscode
 .qmake.stash
-main.moc
-main.o
 hellife
 Makefile
-moc_predefs.h
+.mocs
+.objs

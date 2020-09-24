@@ -1,8 +1,11 @@
 #include <iostream>
 
+#include "Headers/QWorldWidget.h"
+#include "Headers/CellularWorld.h"
+#include "Headers/MainWindow.h"
+#include "./Headers/QWorldWidget.h"
+
 #include <QApplication>
-#include "headers/HellWindow.h"
-#include "headers/World.h"
 #include <QTimer>
 
 
@@ -34,21 +37,15 @@ int main(int argc, char ** argv) {
     
     QApplication app(argc, argv);
 
-    cout << "RESOLUTION: " << WIDTH << "x" << HEIGHT << endl;
-    cout << "FPS: " << FPS << endl;
+    CellularWorld* world = new CellularWorld(HEIGHT, WIDTH);
+    world->initialize(100-PROC_OF_ALIVE_CELLS);
+        
+    MainWindow* window = new MainWindow(world);
 
-    HellWindow *window = new HellWindow(WIDTH, HEIGHT, SCALE);
-    World *world = new World(HEIGHT, WIDTH);
-
-    world->initialize(100 - PROC_OF_ALIVE_CELLS);
-    window->initialize(world->currentState);
-
-    QObject::connect(world, &World::stateChanged, window, &HellWindow::updateState);
-    
     QTimer timer;
-    QObject::connect(&timer, &QTimer::timeout, world, &World::createNewState);
-
-    timer.start(int(1000/FPS));
+    QObject::connect(&timer, &QTimer::timeout, window->worldWidget, &QWorldWidget::updateState);
+    timer.start(int(1000/60));
+    
 
     window->resize(WIDTH, HEIGHT);
     window->show();
