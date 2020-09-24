@@ -2,9 +2,11 @@
 #define MAIN_WINDOW_H
 
 #include <QMainWindow>
+#include <QToolBar>
+#include <QTimer>
 
 #include "../Headers/AbstractWorld.h"
-#include "../Headers/QWorldWidget.h"
+#include "../Headers/WorldWidget.h"
 
 
 class MainWindow : public QMainWindow
@@ -13,12 +15,16 @@ class MainWindow : public QMainWindow
 
 public:
     MainWindow(AbstractWorld* world);
-    QWorldWidget* worldWidget;
 
 private:
     void createMenu();
     void createToolBar();
+    void createActions();
     void createWidgets(AbstractWorld* world);
+
+    WorldWidget* worldWidget;
+    QToolBar* toolBar;
+    QTimer timer;
 };
 
 

@@ -13,11 +13,12 @@ public:
     bool** currentState = {};
 
     int width, height;
-    bool states[2][9] = { {0, 0, 0, 1, 0, 0, 0, 0, 0}, {0, 0, 1, 1, 0, 0, 0, 0, 0}}; // 0 -> 3, 1 -> 2, 3
+    bool states[2][9] = { {0, 1, 1, 0, 0, 0, 0, 0, 1}, {0, 0, 0, 1, 1, 1, 1, 0, 0}}; // 0 -> 3, 1 -> 2, 3
 
-    void initialize(int);
+    void initializeState(int);
     void updateState();
     bool** getCurrentState();
+    
     int getWidth();
     int getHeight();
         

@@ -7,8 +7,10 @@
 class AbstractWorld 
 {
 public:
+    virtual void initializeState(int) = 0;
     virtual void updateState() = 0;
     virtual bool** getCurrentState() = 0;
+
     virtual int getWidth() = 0;
     virtual int getHeight() = 0;
 };

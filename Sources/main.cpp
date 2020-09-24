@@ -1,9 +1,8 @@
 #include <iostream>
 
-#include "Headers/QWorldWidget.h"
 #include "Headers/CellularWorld.h"
 #include "Headers/MainWindow.h"
-#include "./Headers/QWorldWidget.h"
+#include "Headers/WorldWidget.h"
 
 #include <QApplication>
 #include <QTimer>
@@ -38,14 +37,9 @@ int main(int argc, char ** argv) {
     QApplication app(argc, argv);
 
     CellularWorld* world = new CellularWorld(HEIGHT, WIDTH);
-    world->initialize(100-PROC_OF_ALIVE_CELLS);
+    world->initializeState(100-PROC_OF_ALIVE_CELLS);
         
     MainWindow* window = new MainWindow(world);
-
-    QTimer timer;
-    QObject::connect(&timer, &QTimer::timeout, window->worldWidget, &QWorldWidget::updateState);
-    timer.start(int(1000/60));
-    
 
     window->resize(WIDTH, HEIGHT);
     window->show();
