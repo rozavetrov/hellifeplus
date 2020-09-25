@@ -22,9 +22,10 @@ public slots:
 private:
     QWidget* centralWidget;
     QVBoxLayout* mainLayout;
-    QSlider *probOfZerosSlider;
+    QSlider *probabilitySlider;
 
-    void createControls();
+    void createProbabilityControls();
+    void createRulesControls();
     void createButtons();
 
     int probabilityOfDeadCells;

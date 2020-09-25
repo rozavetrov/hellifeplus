@@ -21,8 +21,6 @@ MainWindow :: MainWindow(AbstractWorld* world)
     this->createWidgets(world);
     this->createActions();
     this->createConfigDialog();
-
-    this->worldWidget->restart(98);
 }
 
 

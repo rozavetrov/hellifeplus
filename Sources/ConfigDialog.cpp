@@ -4,6 +4,10 @@
 #include <QPushButton>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
+#include <QLabel>
+#include <QString>
+#include <QSpinBox>
+#include <QtGlobal>
 
 
 ConfigDialog :: ConfigDialog()
@@ -13,23 +17,73 @@ ConfigDialog :: ConfigDialog()
     this->mainLayout = new QVBoxLayout(centralWidget);
     centralWidget->setLayout(mainLayout);
 
-    this->createControls();
+    this->createProbabilityControls();
+    this->createRulesControls();
     this->createButtons();
-
+    
+    // TO DO: auto resize
+    this->resize(200, 150);
     setWindowTitle(tr("Config Dialog"));
 }
 
-void ConfigDialog :: createControls()
-{
-    probOfZerosSlider = new QSlider(Qt::Horizontal);
-    probOfZerosSlider->setMinimum(2);
-    probOfZerosSlider->setMaximum(100);
-    probOfZerosSlider->setTickPosition(QSlider::TicksBothSides);
-    probOfZerosSlider->setTickInterval(10);
-    probOfZerosSlider->setSingleStep(1);
+void ConfigDialog :: createProbabilityControls()
+{   
+    QVBoxLayout* mainProbabilityLayout = new QVBoxLayout;
+    QHBoxLayout* probabilityLayout = new QHBoxLayout;
 
-    QObject::connect(probOfZerosSlider, &QSlider::valueChanged, this, &ConfigDialog::setProbabilityOfDeadCells);
-    this->mainLayout->addWidget(probOfZerosSlider);
+    probabilitySlider = new QSlider(Qt::Horizontal);
+    probabilitySlider->setMinimum(2);
+    probabilitySlider->setMaximum(100);
+    probabilitySlider->setTickPosition(QSlider::TicksBothSides);
+    probabilitySlider->setTickInterval(10);
+    probabilitySlider->setSingleStep(1);
+
+    QSpinBox* probabilitySpinBox = new QSpinBox;
+    probabilitySpinBox->setRange(2, 100);
+    probabilitySpinBox->setSingleStep(1);
+
+    QObject::connect(probabilitySlider, &QSlider::valueChanged, this, &ConfigDialog::setProbabilityOfDeadCells);
+    QObject::connect(probabilitySlider, &QSlider::valueChanged, probabilitySpinBox, &QSpinBox::setValue);
+    QObject::connect(probabilitySpinBox, QOverload<int>::of(&QSpinBox::valueChanged), probabilitySlider, &QSlider::setValue);
+
+    probabilityLayout->addWidget(probabilitySpinBox);
+    probabilityLayout->addWidget(probabilitySlider);
+
+    QLabel* descriptionLabel = new QLabel(tr("Percent of alive cells: "), this);
+
+    mainProbabilityLayout->addWidget(descriptionLabel);
+    mainProbabilityLayout->addLayout(probabilityLayout);
+    
+    this->mainLayout->addLayout(mainProbabilityLayout);
+}
+
+void ConfigDialog :: createRulesControls()
+{
+    QVBoxLayout* mainRulesLayout = new QVBoxLayout;
+    QHBoxLayout* rulesLayout = new QHBoxLayout;
+
+    QSpinBox* rulesForDeadCellSpinBox = new QSpinBox;
+    rulesForDeadCellSpinBox->setRange(0, 8);
+    rulesForDeadCellSpinBox->setSingleStep(1);
+
+    QSpinBox* rulesForAliveCellSpinBox = new QSpinBox;
+    rulesForAliveCellSpinBox->setRange(0, 8);
+    rulesForAliveCellSpinBox->setSingleStep(1);
+
+    QLabel* aliveLabel = new QLabel(tr("Dead: "), this);
+    QLabel* deadLabel = new QLabel(tr("Alive: "), this);
+
+    rulesLayout->addWidget(deadLabel);
+    rulesLayout->addWidget(rulesForDeadCellSpinBox);
+    rulesLayout->addWidget(aliveLabel);
+    rulesLayout->addWidget(rulesForAliveCellSpinBox);
+
+    QLabel* descriptionLabel = new QLabel(tr("Count of alive cells around: "), this);
+
+    mainRulesLayout->addWidget(descriptionLabel);
+    mainRulesLayout->addLayout(rulesLayout);
+
+    this->mainLayout->addLayout(mainRulesLayout);
 }
 
 void ConfigDialog :: createButtons()

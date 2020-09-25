@@ -27,7 +27,7 @@ int main(int argc, char ** argv) {
     
     QApplication app(argc, argv);
 
-    CellularWorld* world = new CellularWorld(HEIGHT, WIDTH);
+    CellularWorld* world = new CellularWorld(HEIGHT-180, WIDTH);
     MainWindow* window = new MainWindow(world);
 
     window->resize(WIDTH, HEIGHT);
