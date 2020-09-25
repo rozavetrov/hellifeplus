@@ -18,7 +18,7 @@ public:
 
 public slots:
     void resume();
-    void stop();
+    void restart(int probability);
     void pause();
 
 private:

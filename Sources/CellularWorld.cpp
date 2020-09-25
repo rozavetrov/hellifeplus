@@ -1,5 +1,7 @@
 #include "../Headers/CellularWorld.h"
 #include "../Headers/utils.h"
+#include <cstdlib>
+#include <time.h>
 
 
 CellularWorld :: CellularWorld(int height, int width) {
@@ -10,14 +12,19 @@ CellularWorld :: CellularWorld(int height, int width) {
     createStates(height, width);
 };
 
-void CellularWorld :: initializeState(int probOfZeros) {
+void CellularWorld :: initializeState(int probability) {
+    srand(time(NULL));
+
     for(int y = 0; y < height; y++) {
         for(int x = 0; x < width; x++) {
-            this->previousState[y][x] = 0;
-            if(x == int(width/2)-1 && y == int(height/2)-1) {
-                // this->previousState[y][x] = getRandomWithProbability(probOfZeros);
-                this->previousState[y][x] = 1;
-            }
+            this->previousState[y][x] = getRandomWithProbability(probability);
+
+            // this->previousState[y][x] = 0;
+            // if(x == int(width/2)-1 && y == int(height/2)-1) {
+            //     this->previousState[y][x] = getRandomWithProbability(probOfZeros);
+            //     this->previousState[y][x] = 1;
+            // }
+
             this->currentState[y][x] = this->previousState[y][x];
         }
     }

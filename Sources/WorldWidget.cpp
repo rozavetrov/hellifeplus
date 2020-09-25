@@ -34,10 +34,10 @@ void WorldWidget :: resume()
     update();
 }
 
-void WorldWidget :: stop()
+void WorldWidget :: restart(int probability)
 {
     this->timer.stop();
-    this->world->initializeState(95);
+    this->world->initializeState(probability);
     update();
 }
 
@@ -45,7 +45,6 @@ void WorldWidget :: pause()
 {
     this->timer.stop();
 }
-
 
 void WorldWidget :: connectSignals()
 {
