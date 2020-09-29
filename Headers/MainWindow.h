@@ -3,7 +3,6 @@
 
 #include <QMainWindow>
 #include <QToolBar>
-#include <QTimer>
 #include <QHBoxLayout>
 
 #include "../Headers/AbstractWorld.h"
@@ -25,12 +24,10 @@ private:
     void createToolBar();
     void createActions();
     void createControls();
-    // void createConfigDialog();
     void createWidgets(AbstractWorld* world);
 
     WorldWidget* worldWidget;
     QToolBar* toolBar;
-    QTimer timer;
     QVBoxLayout* mainLayout;
 };
 

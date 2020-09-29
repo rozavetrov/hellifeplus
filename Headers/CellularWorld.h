@@ -4,6 +4,7 @@
 #include "../Headers/AbstractWorld.h"
 
 
+// Realization of "AbstractWorld" interface
 class CellularWorld : public AbstractWorld 
 {
 public:
@@ -12,12 +13,13 @@ public:
     bool** previousState = {};
     bool** currentState = {};
 
-    bool states[2][9] = { {0, 0, 0, 1, 0, 0, 0, 0, 0}, {0, 0, 1, 1, 0, 0, 0, 0, 0}}; // 0 -> 3, 1 -> 2, 3
+    bool rule[2][9] = { {0, 0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0, 0}}; // 0 -> 3, 1 -> 2, 3
 
     void initializeState(int);
     void updateState();
     bool** getCurrentState();
-    
+    void setRule(bool** newRule);
+
     int getWidth();
     int getHeight();
         

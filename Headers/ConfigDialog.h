@@ -5,8 +5,10 @@
 #include <QWidget>
 #include <QVBoxLayout>
 #include <QSlider>
+#include <QPushButton>
 
 
+// Dialog to initialize fisrt state of world
 class ConfigDialog : public QDialog
 {
     Q_OBJECT
@@ -16,8 +18,12 @@ public:
     int getProbabilityOfDeadCells();
 
 public slots:
-    // void changeConfig();
     void setProbabilityOfDeadCells(int);
+    bool** getRule();
+
+private slots:
+    void setRule(int, int);
+    void changeButtonColor(QPushButton *button);
 
 private:
     QWidget* centralWidget;
@@ -26,9 +32,11 @@ private:
 
     void createProbabilityControls();
     void createRulesControls();
-    void createButtons();
+    void createOKButtons();
+    void createRuleButtonsGrid();
 
     int probabilityOfDeadCells;
+    bool rule[2][9] = { {0, 0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0, 0} };
 };
 
 #endif

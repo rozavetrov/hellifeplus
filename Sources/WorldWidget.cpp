@@ -4,6 +4,7 @@
 #include <QPaintEvent>
 #include <QPainter>
 #include <QObject>
+#include <iostream>
 
 
 WorldWidget :: WorldWidget(AbstractWorld* world) 
@@ -49,4 +50,9 @@ void WorldWidget :: pause()
 void WorldWidget :: connectSignals()
 {
     QObject::connect(&this->timer, &QTimer::timeout, this, &WorldWidget::resume);
+}
+
+void WorldWidget :: setRule(bool** newRule)
+{   
+    this->world->setRule(newRule);
 }

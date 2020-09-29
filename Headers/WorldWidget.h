@@ -8,6 +8,7 @@
 #include <QPaintEvent>
 
 
+// Main widget to paint world
 class WorldWidget : public QWidget 
 {
     Q_OBJECT
@@ -15,6 +16,7 @@ class WorldWidget : public QWidget
 public:
     WorldWidget(AbstractWorld* world);
     void paintEvent(QPaintEvent* e);
+    void setRule(bool**);
 
 public slots:
     void resume();

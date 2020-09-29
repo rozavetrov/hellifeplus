@@ -76,7 +76,10 @@ void MainWindow :: createConfigDialog()
     
     if(dialog->exec()) {
         int probability = dialog->getProbabilityOfDeadCells();
+        bool** newRule = dialog->getRule();
+
         this->worldWidget->restart(100 - probability);
+        this->worldWidget->setRule(newRule);
     }
 
     delete dialog;
